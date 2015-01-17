@@ -93,7 +93,7 @@ var populateNodes = function(){
 	//Initial Nodes
 
 	
-	for ( var i = 0; i < 100; i++){
+	for ( var i = 0; i < 10; i++){
 		obj = {
 			group: "nodes",
 			data: {
@@ -116,6 +116,8 @@ var populateNodes = function(){
 		console.log('ELEMENT TEST TEST')
 		console.log(ele)
 	})
+
+	cy.layout({name: 'cola'})
 
 }
 
@@ -229,7 +231,7 @@ var createHyperEdge = function(nodeSelections){
 		},
 		css: {
 			'width' : '6px',
-			'line-color' : 'black',
+			'line-color' : 'rgb(255, 0, 0)',
 			'line-style' : 'solid',
 			'target-arrow-shape' : 'triangle',
 			'target-arrow-color' : 'black',
@@ -240,6 +242,8 @@ var createHyperEdge = function(nodeSelections){
 
 	//HERE WE DEFINE SOURCES TO CENTRAL
 	sources.forEach(function(src, indX){
+		var str = Math.floor(Math.random()*10+1)					//<<<<<< Random. Must change to real val
+
 		console.log(src.data('id'))
 		edges.push({
 			group: 'edges',
@@ -247,14 +251,15 @@ var createHyperEdge = function(nodeSelections){
 				id: "H" + hyperEdgeIndex + "E" + (indX+1),
 				source: src.data('id'),
 				target: centralNode.data('id'),
-				strength: 2
+				strength: str
 			},
 			css: {
-				'width' : '3px',
-				'line-color' : 'red',
-				'line-style' : 'dashed',
+				'width' : str.toString() + 'px',
+				'line-color' : 'rgb(255, 0, 0)',
+				'opacity' : '0.2',
+				'line-style' : 'solid',
 				'source-arrow-shape' : 'tee',
-				'source-arrow-color' : 'red'
+				'source-arrow-color' : 'rgba(255, 0, 0, 1)'
 			}
 		})
 	})
@@ -266,16 +271,12 @@ var createHyperEdge = function(nodeSelections){
 	newHyperEdge = newHyperEdge.add(completeHyperEdge)
 
 	cy.layout({
-
-
 		
 		name: 'cola',
 		padding: 20,
 		animate: true, // whether to transition the node positions
-			animationDuration: 500, // duration of animation in ms if enabled
-			nodeSpacing: function( node ){ return 10; },
-
-
+		animationDuration: 500, // duration of animation in ms if enabled
+		//nodeSpacing: function( node ){ return 10; },
 
 		// positioning options
 		randomize: false, // use random node positions at beginning of layout
@@ -307,7 +308,8 @@ var createHyperEdge = function(nodeSelections){
 		allConstIter: undefined, // initial layout iterations with all constraints including non-overlap
 
 		// infinite layout options
-		infinite: false // overrides all other options for a forces-all-the-time mode
+		infinite: true // overrides all other options for a forces-all-the-time mode
+
 
 		
 
@@ -351,11 +353,17 @@ $('document').ready(function(){
 		if(e.which==76){
 			cy.elements().each(function(i, ele){
 				if(ele.isNode()){
-					console.log("LOCKING")
-					ele.lock()
+					if(ele.locked()){
+						console.log("UNLOCKING")
+						ele.unlock()
+					}
+					else{
+						console.log("LOCKING")
+						ele.lock()
+					}
 				}
 			})
-			console.log('NODES LOCKED')
+			
 		}
 		//F
 		if(e.which == 70){
@@ -363,8 +371,10 @@ $('document').ready(function(){
 				name: 'cola',
 				padding: 20,
 				animate: true, // whether to transition the node positions
-	  			animationDuration: 500, // duration of animation in ms if enabled
+	  			animationDuration: 1000, // duration of animation in ms if enabled
+	  			randomize: true,
 	  			//nodeSpacing: function( node ){ return 100; },
+	  			infinite: true
 			})
 		}
 		//T

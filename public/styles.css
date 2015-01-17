@@ -3,6 +3,15 @@ body{
 	color:#000;
 	font-family: helvetica, arial;
 }
+#instructions{
+	position: absolute;
+	top: 20px;
+	left:10px;
+
+}
+ul{
+	list-style-type: none
+}
 
 #cy{
 	width: 100vw;
