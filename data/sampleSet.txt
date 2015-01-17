@@ -1,0 +1,8 @@
+a,
+b,
+c,
+d,
+
+
+
+ab, abc, bcd, acd, ad

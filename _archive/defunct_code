@@ -1,0 +1,211 @@
+		// var hyperEdgeListLength = hyperEdgeList.length;
+		// console.log('HyperEdgeList Length: ' + hyperEdgeListLength);
+
+		// console.log('Creating HyperEdge...')
+		// var hyperEdge = cy.collection()
+
+		// console.log('Adding central node to hyperedge')
+
+		// var newNode = {
+		// 	//Element object with group 'nodes' for cy
+		// 	group: 'nodes',
+		// 	data: {
+		// 		id: "hyperNode" + hyperEdgeListLength,
+		// 	},
+		// 	css: {
+		// 		'background': 'blue',
+		// 		'width': '10px',
+		// 		'height': '10px'
+		// 	}
+		// }
+		// hyperEdge.add(newNode)
+
+
+		// console.log('Preparing edges of hyperEdge...')
+		// for (var i = 0; i < 3; i++){
+
+		// 	var edge = {
+		// 		group: "edges",
+		// 		data: {
+		// 			id: "H" + hyperEdgeListLength + "E" + i.toString(),
+		// 			source: hyperEdge.eq(0).data.id,
+		// 			target: nodeList[Math.floor(Math.random() * nodeList.length)].data.id
+		// 		}
+		// 	}
+		// 	hyperEdge.add(edge)
+		// }
+		// console.log('HYPEREDGE:')
+		// console.log(hyperEdge)
+
+		// hyperEdge.each(function(i, ele){
+		// 	cy.add(ele)
+		// 	if(i < 0){
+		// 		var node = ele.data('target')
+		// 		hyperEdge.add(cy.getElementById('#' + node))
+		// 		console.log('ADDED: ' + node)
+		// 	}
+		// })
+		/*
+		for(var i = 1; i < hyperEdge.length; i++){
+			cy.add(hyperEdge[i])
+			//Append hyperedge index to list of hyperedge indexes for the node with TARGET ID
+			console.log('TRYING THE LIST THING')
+			//Don't even ASK. Revisit: Append index (or name?) of THIS hyperedge to the hyperEdge lists of its targets
+			cy.$('#' +cy.$( '#' + hyperEdge[i].data.id).data('target')).data('hyperEdge').push(hyperEdge[i].data.id)//.append(index))
+			
+		}
+		*/
+
+
+		/* <<<< OLD ( hyperEdgeList as Array, not Collection)
+
+		var index = hyperEdgeList.length;
+		
+		//Create HyperEdge obj (Central Node + list of edges)
+		//Create new node
+		//Populate HyperEdge obj with edges connecting (NODE) to (Edge nodes)
+		
+
+		
+		console.log('Preparing HyperEdge...')
+		var hyperEdge = []
+		var newNode = {
+			//Element object with group 'nodes' for cy
+			group: 'nodes',
+			data: {
+				id: "hyperNode" + index,
+				weight: 0,
+				hyperEdge: []
+			},
+			css: {
+				'background': 'blue',
+				'width': '10px',
+				'height': '10px'
+			}
+		}
+		hyperEdge.push(newNode)
+
+
+			//List of element objects with group 'edges' for cy
+		console.log(hyperEdge)
+		console.log('Empty HyperEdge Created. Adding Node ')
+		cy.add(hyperEdge[0])
+		
+
+		console.log('Preparing edges of hyperEdge...')
+		for (var i = 0; i < 3; i++){
+
+			var edge = {
+				group: "edges",
+				data: {
+					id: "H" + index + "E" + i.toString(),
+					source: hyperEdge[0].data.id,
+					target: nodeList[Math.floor(Math.random() * nodeList.length)].data.id,
+					hyperEdge: []
+				}
+			}
+			hyperEdge.push(edge)
+		}
+		console.log('Edge Set Created. HyperEdge now:')
+		console.log(hyperEdge)
+
+		
+		for(var i = 1; i < hyperEdge.length; i++){
+			cy.add(hyperEdge[i])
+			//Append hyperedge index to list of hyperedge indexes for the node with TARGET ID
+			console.log('TRYING THE LIST THING')
+			//Don't even ASK. Revisit: Append index (or name?) of THIS hyperedge to the hyperEdge lists of its targets
+			cy.$('#' +cy.$( '#' + hyperEdge[i].data.id).data('target')).data('hyperEdge').push(hyperEdge[i].data.id)//.append(index))
+			
+		}
+
+		cy.elements().each(function(i, ele){
+			console.log('ELEMENT: ' + i);
+			console.log('HE LIST: ');
+			console.log(ele.data('hyperEdge'))
+			console.log('---')
+		})
+
+		hyperEdgeList.push(hyperEdge)
+
+		*/
+
+
+
+		/////
+		/////
+
+
+			// var col = cy.collection();
+			// var hEdge = hyperEdgeList[0]
+			// console.log(hEdge)
+
+			// console.log('ADDING: ')
+			// console.log(hEdge[0])
+
+			// console.log('COL');
+			// console.log(col)
+
+			// col.add(cy.$('#' + hEdge[0].data.id))
+
+			// var nodeArr = []
+
+			// for(var elementIndex = 1; elementIndex < hEdge.length; elementIndex += 1){
+			// 	var nodeID = cy.$('#' + hEdge[elementIndex].data.id).data('target')
+			// 	console.log('NODEID: ' + nodeID)
+			// 	var node = cy.getElementById('#' + nodeID)
+
+			// 	nodeArr.push(node)
+
+			// 	console.log('NODE')
+			// 	console.log(node)
+				
+			// }
+			// console.log('NodeArr');
+			// console.log(nodeArr)
+
+			// col.add(nodeArr)
+			// console.log('COL');
+			// console.log(col)
+
+			// col.layout({
+			// 	name: 'cola',
+			// 	padding: 20,
+			// 	animate: true, // whether to transition the node positions
+	  // 			animationDuration: 500, // duration of animation in ms if enabled
+	  // 			nodeSpacing: function( node ){ return 100; },
+			// })
+
+		}
+				/*
+				if(ele.data('hyperEdge')){
+					console.log('FOUND HE')
+
+					//This makes sure only the Hyperedge affect the relevant nodes
+					ele.layout({
+						name: 'cola',
+						padding: 20,
+						animate: true, // whether to transition the node positions
+			  			animationDuration: 500, // duration of animation in ms if enabled
+					})
+				}
+			})
+			*/
+
+
+			/*
+			console.log('Hyperedges:')
+			for(hE in hyperEdgeList){
+				console.log('Elements in H' + hE)
+				for(element in hyperEdgeList[hE]){
+					console.log(hyperEdgeList[hE][element])
+				}
+			}
+
+			cy.layout({
+				name: 'cola',
+				padding: 20,
+				animate: true, // whether to transition the node positions
+	  			animationDuration: 500, // duration of animation in ms if enabled
+			})
+			*/
