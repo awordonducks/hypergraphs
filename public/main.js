@@ -71,7 +71,7 @@ var edgeList = []
 var hyperEdgeList = []
 var cy;
 
-var initialiseGraph = function(){
+var initialiseGraph = function(n){
 	cy = cytoscape({
 	  container: document.getElementById('cy'), 
 	  style: [],
@@ -83,17 +83,17 @@ var initialiseGraph = function(){
 	  motionBlur: false,
 	  ready: function(){ 
 	  	console.log('ready');
-	  	populateNodes()
+	  	populateNodes(n)
 	  }
 	});
 }
 
 
-var populateNodes = function(){
+var populateNodes = function(n){
 	//Initial Nodes
 
 	
-	for ( var i = 0; i < 10; i++){
+	for ( var i = 0; i < n; i++){
 		obj = {
 			group: "nodes",
 			data: {
@@ -326,11 +326,24 @@ var createHyperEdge = function(nodeSelections){
 $('document').ready(function(){
 
 	//getData()				//<<< Call to json file on server.
+	var numberOfNodes = 40
 
-	initialiseGraph();
+
+	
+
+	$('#userInput').keydown(function(e){
+
+	})
 
 	////KEY BINDINGS.
 	$(document).keydown(function(e){
+		if(e.which==13){
+			var numberOfNodes = $('#userInput').val()
+			console.log(numberOfNodes)
+			$('#testingInput').css({'opacity' : '0'})
+			//$('testingInput').css({'opacity' : '0'})
+			initialiseGraph(numberOfNodes);
+		}
 		//H
 		if(e.which == 72){
 			var selection = []
